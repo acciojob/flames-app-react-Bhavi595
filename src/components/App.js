@@ -11,7 +11,7 @@ const App  = ()=> {
     const [name2 , Setname2] = useState("");
     const [flag , Setflag]   = useState(false);
     const [answer , SetAnswer] = useState("");
-
+     console.log(name1 , name2);
 
 
     function CalculateRelation(e){
@@ -47,13 +47,13 @@ const App  = ()=> {
             <div id="main">
 
           <form>
-            <input value={name1} placeholder="Enter first name" onChange={(e)=>{Setname1(e.target.value)}}  data-testid="input1"/>
-            <input value={name2} placeholder="Enter second name" onChange={(e)=>{Setname2(e.target.value)}}  data-testid="input2"/>
+            <input value={name1} placeholder="Enter first name" onChange={(e)=>{Setname1(e.target.value)}} name="name1"  data-testid="input1"/>
+            <input value={name2} placeholder="Enter second name" onChange={(e)=>{Setname2(e.target.value)}} name="name2"  data-testid="input2"/>
             <button type="submit" onClick={CalculateRelation} data-testid="calculate_relationship">Calculate Relationship Future</button>
             <button onClick={(e)=>{e.preventDefault();Setname1("");Setname2("");SetAnswer("")}} data-testid="clear" >Clear</button>
           </form>
 
-
+          
           <h3 value={answer} data-testid="answer">{answer}</h3>
             </div>
         )
