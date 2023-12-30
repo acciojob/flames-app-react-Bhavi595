@@ -3,7 +3,7 @@ import '../styles/App.css';
 
 
 
-let arr = ["Siblings", "Friends","Love","Affection","Marriage","Enemy","Please Enter valid input"]
+let arr = ["Siblings", "Friends","Love","Affection","Marriage","Enemy"]
 
 const App  = ()=> {
    
@@ -11,13 +11,13 @@ const App  = ()=> {
     const [name2 , Setname2] = useState("");
     const [flag , Setflag]   = useState(false);
     const [answer , SetAnswer] = useState("");
-     console.log(name1 , name2);
+    //  console.log(name1 , name2);
 
 
     function CalculateRelation(e){
            e.preventDefault();
-           if(name1.trim()=="" || name2.trim()==""){
-            SetAnswer(arr[6]);
+           if(name1.trim()==="" || name2.trim()===""){
+            SetAnswer("Please Enter valid names");
             return
            }  // Handel the Emty input
             
@@ -25,21 +25,19 @@ const App  = ()=> {
            let str1 = name1;
            let str2 = name2;
 
-           for(let i = 0; i<name1.length; i++){
-                 
-            if(name2.includes(name1[i])){
-
-                str1 = name1.replace(name1[i],"");
-                str2 = name2.replace(name1[i],"")
-
+           for(let t of str1){ // Soumya // ansh
+            if(str2.includes(t)){
+              str1 =  str1.replace(t,"");
+              str2 = str2.replace(t,"");
             }
-           }
+       }
 
            Setname1(str1);
            Setname2(str2);
-        //    Setflag(true);
-           SetAnswer(arr[(name1.length+name2.length)%6]);
-
+           Setflag(true);
+           SetAnswer(arr[(str1.length + str2.length)%6]);
+           console.log(str1 , str2);
+           console.log(name1 , name2);
 
     }
 
@@ -50,10 +48,10 @@ const App  = ()=> {
             <input value={name1} placeholder="Enter first name" onChange={(e)=>{Setname1(e.target.value)}} name="name1"  data-testid="input1"/>
             <input value={name2} placeholder="Enter second name" onChange={(e)=>{Setname2(e.target.value)}} name="name2"  data-testid="input2"/>
             <button type="submit" onClick={CalculateRelation} data-testid="calculate_relationship">Calculate Relationship Future</button>
-            <button onClick={(e)=>{e.preventDefault();Setname1("");Setname2("");SetAnswer("")}} data-testid="clear" >Clear</button>
+            <button onClick={(e)=>{e.preventDefault();Setname1("");Setname2("");SetAnswer("");Setflag(false);}} data-testid="clear" >Clear</button>
           </form>
 
-          
+            
           <h3 value={answer} data-testid="answer">{answer}</h3>
             </div>
         )
